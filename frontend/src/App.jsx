@@ -9,9 +9,19 @@ import "./App.css";
 function App() {
   const [meals, setMeals] = useState([]);
   const [search, setSearch] = useState("chicken");
-  const [favorites, setFavorites] = useState([]);
 
-  // ✅ GET request from MealDB
+  // ✅ Load favorites from localStorage when app starts
+  const [favorites, setFavorites] = useState(() => {
+    const saved = localStorage.getItem("favorites");
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  // ✅ Whenever favorites change, save them back to localStorage
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
+
+  // ✅ Fetch data from MealDB API
   useEffect(() => {
     if (search.trim() === "") {
       setMeals([]);
@@ -40,7 +50,7 @@ function App() {
       .catch((err) => console.error("Error fetching meals:", err));
   }, [search]);
 
-  // ✅ Add favorite meals
+  // ✅ Add to favorites (avoid duplicates)
   function addFavorite(meal) {
     if (!favorites.find((fav) => fav.id === meal.id)) {
       setFavorites([...favorites, meal]);
