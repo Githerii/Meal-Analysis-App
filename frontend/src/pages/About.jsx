@@ -8,6 +8,8 @@ function About() {
         Githeri’s Meal Analysis App helps users search for meals, view
         ingredients, and get calorie estimates. Data is fetched from the
         MealDB API, and users can mark favorite meals for easy access later.
+        The name Githeri is inspired by a traditional Kenyan dish made of maize and
+        beans.
       </p>
       <p>
         In the future, I plan to add a login feature and a section where users
