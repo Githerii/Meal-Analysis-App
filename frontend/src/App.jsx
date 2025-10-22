@@ -10,18 +10,13 @@ function App() {
   const [meals, setMeals] = useState([]);
   const [search, setSearch] = useState("chicken");
 
-  // ✅ Load favorites from localStorage when app starts
+  // ✅ Initialize favorites from localStorage
   const [favorites, setFavorites] = useState(() => {
     const saved = localStorage.getItem("favorites");
     return saved ? JSON.parse(saved) : [];
   });
 
-  // ✅ Whenever favorites change, save them back to localStorage
-  useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-  }, [favorites]);
-
-  // ✅ Fetch data from MealDB API
+  // ✅ Fetch meals from MealDB API when search changes
   useEffect(() => {
     if (search.trim() === "") {
       setMeals([]);
@@ -50,11 +45,87 @@ function App() {
       .catch((err) => console.error("Error fetching meals:", err));
   }, [search]);
 
-  // ✅ Add to favorites (avoid duplicates)
+  // ✅ Try to load favorites from json-server when app starts
+  useEffect(() => {
+    fetch("http://localhost:3001/favorites")
+      .then((res) => {
+        if (!res.ok) throw new Error("Server not available");
+        return res.json();
+      })
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setFavorites(data);
+          localStorage.setItem("favorites", JSON.stringify(data));
+        }
+      })
+      .catch((err) => {
+        console.warn("Could not load favorites from server:", err.message);
+      });
+  }, []);
+
+  // ✅ Keep localStorage updated whenever favorites change
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
+
+  // ✅ Add favorite (POST to server, update state)
   function addFavorite(meal) {
-    if (!favorites.find((fav) => fav.id === meal.id)) {
-      setFavorites([...favorites, meal]);
-    }
+    if (favorites.find((f) => f.id === meal.id)) return;
+
+    const payload = {
+      id: meal.id,
+      name: meal.name,
+      calories: meal.calories,
+      image: meal.image,
+    };
+
+    fetch("http://localhost:3001/favorites", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("POST failed");
+        return res.json();
+      })
+      .then((data) => {
+        setFavorites((prev) => {
+          const updated = [...prev, data];
+          localStorage.setItem("favorites", JSON.stringify(updated));
+          return updated;
+        });
+      })
+      .catch((err) => {
+        console.warn("POST failed — saving locally:", err.message);
+        setFavorites((prev) => {
+          const updated = [...prev, meal];
+          localStorage.setItem("favorites", JSON.stringify(updated));
+          return updated;
+        });
+      });
+  }
+
+  // ✅ Remove favorite (DELETE on server, update state)
+  function removeFavorite(mealId) {
+    fetch(`http://localhost:3001/favorites/${mealId}`, {
+      method: "DELETE",
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("DELETE failed");
+        setFavorites((prev) => {
+          const updated = prev.filter((f) => f.id !== mealId);
+          localStorage.setItem("favorites", JSON.stringify(updated));
+          return updated;
+        });
+      })
+      .catch((err) => {
+        console.warn("DELETE failed — removing locally:", err.message);
+        setFavorites((prev) => {
+          const updated = prev.filter((f) => f.id !== mealId);
+          localStorage.setItem("favorites", JSON.stringify(updated));
+          return updated;
+        });
+      });
   }
 
   return (
@@ -73,7 +144,15 @@ function App() {
               />
             }
           />
-          <Route path="/favorites" element={<Favorites favorites={favorites} />} />
+          <Route
+            path="/favorites"
+            element={
+              <Favorites
+                favorites={favorites}
+                removeFavorite={removeFavorite}
+              />
+            }
+          />
           <Route path="/about" element={<About />} />
         </Routes>
       </div>

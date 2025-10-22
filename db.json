@@ -1,0 +1,22 @@
+{
+  "favorites": [
+    {
+      "id": "52920",
+      "name": "Chicken Marengo",
+      "calories": 378,
+      "image": "https://www.themealdb.com/images/media/meals/qpxvuq1511798906.jpg"
+    },
+    {
+      "id": "52956",
+      "name": "Chicken Congee",
+      "calories": 568,
+      "image": "https://www.themealdb.com/images/media/meals/1529446352.jpg"
+    },
+    {
+      "id": "52806",
+      "name": "Tandoori chicken",
+      "calories": 292,
+      "image": "https://www.themealdb.com/images/media/meals/qptpvt1487339892.jpg"
+    }
+  ]
+}

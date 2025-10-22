@@ -4,17 +4,31 @@ function About() {
   return (
     <div>
       <h2>About This App</h2>
-      <p>
-        Githeri’s Meal Analysis App helps users search for meals, view
-        ingredients, and get calorie estimates. Data is fetched from the
-        MealDB API, and users can mark favorite meals for easy access later.
-        The name Githeri is inspired by a traditional Kenyan dish made of maize and
-        beans.
-      </p>
-      <p>
-        In the future, I plan to add a login feature and a section where users
-        can track or suggest their own meals.
-      </p>
+       <p>
+          Welcome to <strong>Githeri’s Meal Analysis App</strong> — your personal
+          guide to exploring delicious meals from around the world! This app
+          allows users to search, analyze, and save their favorite dishes using
+          data fetched from <strong>TheMealDB API</strong>.
+        </p>
+
+        <p>
+          The inspiration for this project comes from our beloved Kenyan dish
+          <em> githeri</em> — a humble yet nutritious meal that reflects the
+          spirit of simplicity and togetherness. Our goal is to make meal
+          exploration both informative and fun!
+        </p>
+
+        <p>
+          Future updates will include features like user accounts, personalized
+          meal tracking, and recommendations based on your favorite meals.
+          Whether you’re a foodie or just curious, this app has something for
+          everyone.
+        </p>
+        <img
+        src="https://media.tenor.com/njV98bs-BBgAAAAM/chipmunk.gif"
+        alt="Dancing animal eating food"
+        className="about-image"
+      />
     </div>
   );
 }
