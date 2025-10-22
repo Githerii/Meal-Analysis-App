@@ -7,7 +7,7 @@ function MealCard({ meal, addFavorite }) {
       <h3>{meal.name}</h3>
       <p>Calories: {meal.calories}</p>
       <p><strong>Ingredients:</strong> {meal.ingredients.join(", ")}</p>
-      <p><strong>Instructions:</strong> {meal.instructions.slice(0, 100)}...</p>
+      <p><strong>Instructions:</strong> {meal.instructions.slice(0, 80)}...</p>
       <button onClick={() => addFavorite(meal)}>Add to Favorites</button>
     </div>
   );

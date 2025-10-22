@@ -60,3 +60,24 @@ h1 {
   border-radius: 8px;
   margin-bottom: 10px;
 }
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ff6b6b;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.nav-links a {
+  color: white;
+  margin-left: 15px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}

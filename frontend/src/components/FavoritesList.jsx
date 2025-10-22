@@ -3,7 +3,6 @@ import React from "react";
 function FavoritesList({ favorites }) {
   return (
     <div className="favorites">
-      <h2>Favorite Meals</h2>
       {favorites.length === 0 ? (
         <p>No favorites yet!</p>
       ) : (
