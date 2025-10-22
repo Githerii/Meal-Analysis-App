@@ -7,7 +7,7 @@
 }
 
 h1 {
-  color: #333;
+  color: #ffffff;
   margin-bottom: 20px;
 }
 
@@ -64,7 +64,7 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #ff6b6b;
+  background: #3d3434;
   padding: 10px 20px;
   color: white;
   border-radius: 10px;
@@ -93,4 +93,64 @@ h1 {
   height: auto;
 }
 
+/* 🌟 Hero Section Styling */
+.hero {
+  background-image: url("https://images.unsplash.com/photo-1504674900247-0877df9cc836");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 80px 20px;
+  text-align: center;
+  border-radius: 12px;
+  margin: 20px auto;
+  max-width: 1000px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.hero-content {
+  background: rgba(0, 0, 0, 0.6);
+  display: inline-block;
+  padding: 40px;
+  border-radius: 12px;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+}
+
+.search-bar {
+  margin-top: 10px;
+}
+
+.search-input {
+  padding: 10px 15px;
+  width: 300px;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+.search-input:focus {
+  box-shadow: 0 0 5px #ffb703;
+}
+
+/* Meals Section */
+.meals-section {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.no-results {
+  color: #555;
+  margin-top: 30px;
+  font-size: 1.1rem;
+}
 

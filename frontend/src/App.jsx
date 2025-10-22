@@ -10,13 +10,11 @@ function App() {
   const [meals, setMeals] = useState([]);
   const [search, setSearch] = useState("chicken");
 
-  // ✅ Initialize favorites from localStorage
   const [favorites, setFavorites] = useState(() => {
     const saved = localStorage.getItem("favorites");
     return saved ? JSON.parse(saved) : [];
   });
 
-  // ✅ Fetch meals from MealDB API when search changes
   useEffect(() => {
     if (search.trim() === "") {
       setMeals([]);
@@ -45,7 +43,6 @@ function App() {
       .catch((err) => console.error("Error fetching meals:", err));
   }, [search]);
 
-  // ✅ Try to load favorites from json-server when app starts
   useEffect(() => {
     fetch("http://localhost:3001/favorites")
       .then((res) => {
@@ -63,12 +60,10 @@ function App() {
       });
   }, []);
 
-  // ✅ Keep localStorage updated whenever favorites change
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
 
-  // ✅ Add favorite (POST to server, update state)
   function addFavorite(meal) {
     if (favorites.find((f) => f.id === meal.id)) return;
 
@@ -105,7 +100,6 @@ function App() {
       });
   }
 
-  // ✅ Remove favorite (DELETE on server, update state)
   function removeFavorite(mealId) {
     fetch(`http://localhost:3001/favorites/${mealId}`, {
       method: "DELETE",
