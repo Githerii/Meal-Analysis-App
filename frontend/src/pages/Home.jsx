@@ -5,7 +5,7 @@ import "../App.css";
 function Home({ meals, search, setSearch, addFavorite }) {
   return (
     <div className="home-container">
-      {/* ✅ Hero Section */}
+     
       <section className="hero">
         <div className="hero-content">
           <h1 className="hero-title">🍽️ Discover Delicious Meals</h1>
@@ -24,7 +24,6 @@ function Home({ meals, search, setSearch, addFavorite }) {
         </div>
       </section>
 
-      {/* ✅ Meals Section */}
       <section className="meals-section">
         {meals.length > 0 ? (
           <MealList meals={meals} addFavorite={addFavorite} />
